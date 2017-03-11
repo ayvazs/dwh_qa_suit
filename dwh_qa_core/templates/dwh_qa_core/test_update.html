@@ -1,0 +1,13 @@
+{% extends 'dwh_qa_core/testset_detail.html' %}
+
+{% block path %}
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:index' %}">DWH QA</a>
+    <div class="navbar-brand">></div>
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:set_detail' object.test_set.pk %}">{{ object.test_set.set_name }}</a>
+    <div class="navbar-brand">></div>
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:test_detail' object.test_set.pk object.pk %}">{{ object.test_name }}</a>
+{% endblock path %}
+
+{% block content %}
+    {% include 'dwh_qa_core/test_form_include.html' %}
+{% endblock content %}

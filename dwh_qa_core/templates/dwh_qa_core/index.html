@@ -1,0 +1,32 @@
+{% extends 'dwh_qa_core/base.html' %}
+
+{% block path %}<a class="navbar-brand" href="{% url 'dwh_qa_core:index' %}">DWH QA</a>{% endblock path %}
+
+{% block content %}
+
+    <h1 class="page-header">Dashboard</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Тест-сет</th>
+                    <th>Статус</th>
+                    <th>Общее число тестов</th>
+                    <th>Ошибки</th>
+                    <th>Успешно</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test_set in object_list %}
+                    <tr>
+                        <td><a href="{% url 'dwh_qa_core:set_detail' test_set.pk %}">{{ test_set.set_name }}</a></td>
+                        <td>{{ test_set.get_status|floatformat:1 }}</td>
+                        <td>{{ test_set.get_tests_quantity }}</td>
+                        <td>{{ test_set.get_tests_failed_quantity }}</td>
+                        <td>{{ test_set.get_tests_succeeded_quantity }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+{% endblock content %}

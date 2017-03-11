@@ -1,0 +1,8 @@
+<h1>Connections</h1>
+<ul>
+{% for connection in object_list %}
+    <li>{{ connection.connection_name }}</li>
+{% empty %}
+    <li>No connections yet.</li>
+{% endfor %}
+</ul>

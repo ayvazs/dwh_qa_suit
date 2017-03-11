@@ -1,0 +1,58 @@
+{% extends 'dwh_qa_core/base.html' %}
+
+{% block path %}
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:index' %}">DWH QA</a>
+    <div class="navbar-brand">></div>
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:sync' %}">Sync</a>
+{% endblock path %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">SSH команда:</span>
+                <input class="form-control" type="text" id="ssh_cmd_vcs_checkout">
+            </div>
+        </div>
+        <div class="row">
+            {{ form.test_name.errors }}
+            <div class="input-group">
+                <span class="input-group-addon">Название теста:</span>
+                <input id="{{ form.test_name.id_for_label }}" type="text" class="form-control" name="test_name" placeholder="Укажите название теста" value="{{ form.test_name.value }}">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 text-center"><span><b>Проверяемое значение</b></span></div>
+            <div class="col-sm-6 text-center"><span><b>Контрольное значение</b></span></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                {{ form.right_cnx.errors }}
+                <label for="{{ form.right_cnx.id_for_label }}">Запрос:</label>
+                {{ form.right_cnx }}
+            </div>
+            <div class="col-sm-6 form-group">
+                {{ form.check_cnx.errors }}
+                <label for="{{ form.check_cnx.id_for_label }}">Запрос:</label>
+                {{ form.check_cnx }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                {{ form.right_query.errors }}
+                <div>
+                    <textarea id="{{ form.right_query.id_for_label }}" name="right_query" class="form-control" rows="5">{{ form.right_query.value }}</textarea>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group">
+                {{ form.check_query.errors }}
+                <div>
+                    <textarea id="{{ form.check_query.id_for_label }}" name="check_query" class="form-control" rows="5">{{ form.check_query.value }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>{% endblock content %}

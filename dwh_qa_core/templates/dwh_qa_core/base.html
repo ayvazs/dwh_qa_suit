@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="DWH Quality Checker">
+        <meta name="author" content="Alexander Ayvaz">
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        <title>DWH QA</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/ie10-viewport-bug-workaround.css' %}">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/dashboard.css' %}">
+        <link rel="stylesheet" href="{% static 'dwh_qa_core/css/dwh_qa.css' %}">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {% block path %}<a class="navbar-brand" href="{% url 'dwh_qa_core:index' %}">DWH QA</a>{% endblock path %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'dwh_qa_core:index' %}">Dashboard</a></li>
+              <li><a href="{% url 'dwh_qa_core:sync' %}">Синхронизация</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="main">
+            {% block content %}
+	        {% endblock content %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'bootstrap/js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>
+
+

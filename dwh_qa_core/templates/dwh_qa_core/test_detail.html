@@ -1,0 +1,63 @@
+{% extends 'dwh_qa_core/testset_detail.html' %}
+
+{% block path %}
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:index' %}">DWH QA</a>
+    <div class="navbar-brand">></div>
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:set_detail' object.test_set.pk %}">{{ object.test_set.set_name }}</a>
+    <div class="navbar-brand">></div>
+    <a class="navbar-brand" href="{% url 'dwh_qa_core:test_detail' object.test_set.pk object.pk %}">{{ object.test_name }}</a>
+{% endblock path %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <form action="{% url 'dwh_qa_core:test_execute' object.test_set.pk object.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></button>
+                    </form>
+                </li>
+                <li><a class="btn btn-primary" href="{% url 'dwh_qa_core:test_update' object.test_set.pk object.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Эталон</th>
+                    <th>Проверка</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Источник данных</b></td>
+                    <td>{{ object.right_cnx }}</td>
+                    <td>{{ object.check_cnx }}</td>
+                </tr>
+                <tr>
+                    <td><b>Запрос</b></td>
+                    <td>{{ object.right_query }}</td>
+                    <td>{{ object.check_query }}</td>
+                </tr>
+                <tr>
+                    <td><b>Результат</b></td>
+                    <td>{{ object.right_query_result }}</td>
+                    <td>{{ object.check_query_result }}</td>
+                </tr>
+                <tr>
+                    <td><b>Время выполнения</b></td>
+                    <td>{{ object.test_ts_start|date:"d M Y" }} {{ object.test_ts_start|time:"H:i" }}</td>
+                    <td>{{ object.test_ts_finish|date:"d M Y" }} {{ object.test_ts_finish|time:"H:i" }}</td>
+                </tr>
+                <tr>
+                    <td><b>Статус выполнения</b></td>
+                    <td>{{ object.right_query_error_msg }}</td>
+                    <td>{{ object.check_query_error_msg }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

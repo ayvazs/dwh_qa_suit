@@ -1,0 +1,8 @@
+<h1>Tests</h1>
+<ul>
+{% for test in object_list %}
+    <li>{{ test.test_name }}</li>
+{% empty %}
+    <li>No tests yet.</li>
+{% endfor %}
+</ul>
